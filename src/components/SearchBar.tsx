@@ -10,21 +10,27 @@ const SearchBar = ({ data }: { data: Data[] }) => {
   const [search, setSearch] = useState('')
   const [filteredData, setFilteredData] = useState<typeof data>([])
   const [currIndex, setCurrIndex] = useState<number | null>(null)
+  const [isKeyboardNav, setIsKeyboardNav] = useState(false)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  /**
+   * Refs
+   */
   const listContainerRef = useRef<HTMLUListElement>(null)
   const searchContainerRef = useRef<HTMLDivElement>(null)
-
-  const [isKeyboardNav, setIsKeyboardNav] = useState(false)
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (filteredData.length === 0) return
-      setIsKeyboardNav(true)
+
       switch (event.key) {
         case 'ArrowUp':
+          setIsKeyboardNav(true)
           setCurrIndex((prevIndex) => (prevIndex === null ? filteredData.length - 1 : Math.max(prevIndex - 1, 0)))
           break
         case 'ArrowDown':
+          setIsKeyboardNav(true)
           setCurrIndex((prevIndex) => (prevIndex === null ? 0 : Math.min(prevIndex + 1, filteredData.length - 1)))
           break
         case 'Enter':
@@ -36,6 +42,7 @@ const SearchBar = ({ data }: { data: Data[] }) => {
           setSearch('')
           setCurrIndex(null)
           setFilteredData([])
+          setIsDropdownOpen(false)
           break
         default:
           break
@@ -47,8 +54,7 @@ const SearchBar = ({ data }: { data: Data[] }) => {
   // Handle click outside the search container to close the dropdown
   const handleClickOutside = useCallback((event: MouseEvent) => {
     if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
-      setSearch('')
-      setFilteredData([])
+      setIsDropdownOpen(false)
       setCurrIndex(null)
     }
   }, [])
@@ -104,6 +110,7 @@ const SearchBar = ({ data }: { data: Data[] }) => {
         className='search-input'
         value={search}
         onChange={handleSearch}
+        onFocus={() => setIsDropdownOpen(true)}
       />
       {search ? (
         <button
@@ -111,13 +118,14 @@ const SearchBar = ({ data }: { data: Data[] }) => {
           onClick={() => {
             setSearch('')
             setCurrIndex(null)
+            setIsDropdownOpen(false)
             setFilteredData([])
           }}
         >
           <CrossIcon className='cross-icon' />
         </button>
       ) : null}
-      {search ? (
+      {search && isDropdownOpen ? (
         filteredData.length > 0 ? (
           <ul className='dropdown' ref={listContainerRef}>
             {filteredData.map((item, i) => (
