@@ -13,11 +13,13 @@ const SearchBar = ({ data }: { data: Data[] }) => {
   const listContainerRef = useRef<HTMLUListElement>(null)
   const searchContainerRef = useRef<HTMLDivElement>(null)
 
+  const [isKeyboardNav, setIsKeyboardNav] = useState(false)
+
   // Handle keyboard navigation
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (filteredData.length === 0) return
-
+      setIsKeyboardNav(true)
       switch (event.key) {
         case 'ArrowUp':
           setCurrIndex((prevIndex) => (prevIndex === null ? filteredData.length - 1 : Math.max(prevIndex - 1, 0)))
@@ -120,7 +122,8 @@ const SearchBar = ({ data }: { data: Data[] }) => {
               <li
                 key={i}
                 style={{ background: i === currIndex ? '#fffdbe' : 'transparent' }}
-                onMouseEnter={() => setCurrIndex(i)}
+                onMouseEnter={() => (isKeyboardNav ? null : setCurrIndex(i))}
+                onMouseMove={() => setIsKeyboardNav(false)}
                 onClick={() => handleSelection(item)}
                 role='option'
                 tabIndex={0}
