@@ -1,30 +1,37 @@
-# React + TypeScript + Vite
+# Search Bar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Installation
 
-Currently, two official plugins are available:
+To install and run the project, follow these steps:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Install dependencies using Yarn:
 
-## Expanding the ESLint configuration
+   ```bash
+   yarn
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Start the development server:
 
-- Configure the top-level `parserOptions` property like this:
+   ```bash
+   yarn dev
+   ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Task check points
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+**Search Functionality** : Searches across all fields provided in the JSON data.
+
+**Text Highlighting**: Matching text is highlighted in blue within search results.
+
+**Search Query Display**: Displays "{{queryValue}} found in items" for matching queries.
+
+**Navigation**: Supports keyboard and mouse navigation for the list of cards.
+
+**Single Card Highlighting**: Only one card is highlighted at a time during navigation.
+
+**Navigation Preference**: Keyboard navigation takes priority when hovering over the list, otherwise mouse navigation is used.
+
+**Empty Card Display**: An empty card is displayed when no search results are found.
+
+**Scrollable Card List**: Supports scrolling for a large number of search results.
+
+**Highlighted Card Scrolling**: The highlighted card scrolls into view for better visibility.
