@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { Data } from '../hooks/useMockData'
-import { highlightText } from '../utils/helpers'
+import { highlightText as highlightTextCore } from '../utils/helpers'
 import { CrossIcon, SearchIcon } from './icons'
 
 const SearchBar = ({ data }: { data: Data[] }) => {
@@ -93,6 +93,8 @@ const SearchBar = ({ data }: { data: Data[] }) => {
     }
   }, [currIndex, listContainerRef])
 
+  const highlightText = useCallback((text: string) => highlightTextCore(text, search), [search])
+
   return (
     <div className='search-container' ref={searchContainerRef}>
       <SearchIcon />
@@ -128,17 +130,17 @@ const SearchBar = ({ data }: { data: Data[] }) => {
                 role='option'
                 tabIndex={0}
               >
-                <p>{highlightText(item.id, search)}</p>
-                <h1>{highlightText(item.name, search)}</h1>
+                <p>{highlightText(item.id)}</p>
+                <h1>{highlightText(item.name)}</h1>
                 {getItemsIfExists(item.items, search).length ? (
                   <ul className='item-list'>
                     {getItemsIfExists(item.items, search).map((item, i) => (
-                      <li key={i}>"{highlightText(item, search)}" found in items</li>
+                      <li key={i}>"{highlightText(item)}" found in items</li>
                     ))}
                   </ul>
                 ) : null}
-                <p>Address: {highlightText(item.address, search)}</p>
-                <p>Pincode: {highlightText(item.pincode, search)}</p>
+                <p>Address: {highlightText(item.address)}</p>
+                <p>Pincode: {highlightText(item.pincode)}</p>
               </li>
             ))}
           </ul>
