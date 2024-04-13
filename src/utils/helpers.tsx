@@ -1,9 +1,9 @@
 /**
  * @param {string} text - The text string to be highlighted.
  * @param {string} searchTerm - The search term to highlight within the text.
- * @returns {JSX.Element[]} An array of JSX elements or string representing the highlighted text parts.
+ * @returns {(JSX.Element | string)[]} An array of JSX elements or string representing the highlighted text parts.
  */
-export const highlightText = (text: string, searchTerm: string) => {
+export const highlightText = (text: string, searchTerm: string): (JSX.Element | string)[] => {
   const regex = new RegExp(`(${searchTerm})`, 'gi')
   const parts = text.split(regex)
   return parts.map((part, i) =>
