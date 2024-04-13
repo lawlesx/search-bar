@@ -1,5 +1,9 @@
 # Search Bar
 
+## Live Preview
+
+https://search-bar-kappa-dusky.vercel.app/
+
 ## Installation
 
 To install and run the project, follow these steps:
