@@ -1,0 +1,142 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 10rem;
+  background-color: bisque;
+  min-height: 100vh;
+}
+
+.search-input {
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  font-size: large;
+  font-weight: 600;
+  color: #484848;
+  outline: none;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background-color: white;
+  border-radius: 12px;
+  outline: 1px solid #ccc;
+  width: 30rem;
+  padding: 0 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  main {
+    padding: 2rem 1rem;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+}
+
+.search-container:focus-within {
+  outline: 2px solid #5d5d5d;
+}
+
+.dropdown,
+.not-found {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 30rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown > li {
+  border-bottom: 1px solid #949494;
+  list-style: none;
+  padding: 1rem;
+}
+
+.dropdown > li:last-child {
+  border-bottom: none;
+}
+
+.dropdown > li:hover {
+  /* background-color: #fffdbe; */
+  cursor: pointer;
+}
+
+.cross-icon {
+  width: 1rem;
+  height: 1rem;
+  stroke: #808080;
+}
+
+.cross-icon:hover {
+  stroke: #313131;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+li p {
+  color: #808080;
+}
+
+li p:first-child {
+  font-weight: 600;
+  color: #535353;
+  font-size: large;
+}
+
+li h1 {
+  font-size: larger;
+  color: #3a3a3a;
+  font-style: italic;
+}
+
+.items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: start;
+}
+
+.items p {
+  color: #808080;
+  font-size: small;
+}
+
+.highlight {
+  color: #2361e5;
+  font-weight: 600;
+}
+
+.item-list {
+  border: 1px solid #ccc;
+  border-left: 0px;
+  border-right: 0px;
+  margin: 0.6rem 0;
+}
+
+.item-list > li {
+  list-style: disc;
+  padding: 4px;
+  margin-left: 1rem;
+}
+
+.not-found {
+  padding: 2rem;
+  text-align: center;
+}
